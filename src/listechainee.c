@@ -78,9 +78,26 @@ void destruction_liste(struct elem *liste) {
  * paramètre liste contient l'adresse du pointeur sur la tête de liste
  * à inverser. */
 void inversion_liste(struct elem **liste) {
-    /**
-       Votre code est à mettre ici !
-    */
+    if (*liste == NULL) {
+        return NULL;
+    }
+
+    struct elem *previous = NULL;
+    struct elem *current = *liste;
+    struct elem *tmp = NULL;
+
+    while (current != NULL) {
+        // printf("current = %ld, next = %ld\n", current->val, next->val);
+
+        tmp = current->next;
+        current->next = previous;
+        
+        previous = current;
+        current = tmp;
+    }
+
+    // current is set and next is NULL
+    *liste = previous;
 }
 
 const long unsigned int TAILLE = 100;
