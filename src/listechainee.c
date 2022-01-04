@@ -30,9 +30,11 @@ struct elem {
 /* Affiche les éléments de la liste passée en paramètre sur la sortie
  * standard. */
 void affichage_liste(struct elem *liste) {
-    /**
-       Votre code est à mettre ici !
-    */
+    while (liste != NULL) {
+        printf("-> %ld ", liste->val);
+        liste = liste->next;
+    }
+    
 }
 
 /* Crée une liste simplement chainée à partir des nb_elems éléments du
