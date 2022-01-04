@@ -24,13 +24,26 @@
 #include "bitset1000.h"
 
 static unsigned char *memoire_elem_pool = 0;
+static long unsigned int SIZE = 1000LU;
 
 /**
    Fonction allouant un element
 */
 struct elem *alloc_elem(void) {
-    /* ajouter votre code ici / add your code here */
-    return 0;
+    struct elem *e;
+
+    // Searching for an empty block
+    for (long unsigned int i = 0LU; i < SIZE; i++) {
+        // if the block is free
+        if (!bt1k_get(i)) {
+            e = memoire_elem_pool[i];
+            // set the block as used
+            bt1k_set(i, true);
+            return e;
+        }
+    }
+    // no free block was found
+    return NULL;
 }
 
 /**
