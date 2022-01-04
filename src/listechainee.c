@@ -34,7 +34,6 @@ void affichage_liste(struct elem *liste) {
         printf("-> %ld ", liste->val);
         liste = liste->next;
     }
-    
 }
 
 /* Crée une liste simplement chainée à partir des nb_elems éléments du
@@ -44,23 +43,22 @@ struct elem *creation_liste(long unsigned int *valeurs, size_t nb_elems) {
    struct elem *head = NULL;
 
    for (size_t i = 0; i < nb_elems; i++) {
-       // Allocate the element
-       struct elem *e = malloc(sizeof (struct elem));
+        // Allocate the element
+        struct elem *e = malloc(sizeof (struct elem));
 
-       // Set the head of the list
-       if (i == 0) {
-           head = e;
-       }
+        // Set the head of the list
+        if (i == 0) {
+            head = e;
+        }
+        
+        e->val = *valeurs;
+        e->next = NULL;
 
-    //    printf("%d at @%p\n", *valeurs, e);
-       e->val = *valeurs;
-       e->next = NULL;
-
-       if (previous != NULL) {
-           previous->next = e;
-       }
-       previous = e;
-       valeurs++;
+        if (previous != NULL) {
+            previous->next = e;
+        }
+        previous = e;
+        valeurs++;
    }
 
     return head;
