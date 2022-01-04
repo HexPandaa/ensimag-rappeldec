@@ -68,9 +68,19 @@ struct elem *creation_liste(long unsigned int *valeurs, size_t nb_elems) {
 
 /* Libère toute la mémoire associée à la liste passée en paramètre. */
 void destruction_liste(struct elem *liste) {
-    /**
-       Votre code est à mettre ici !
-    */
+    if (liste == NULL) {
+        return;
+    }
+    struct elem *current = liste;
+    struct elem *next = current->next;
+
+    while (next != NULL) {
+        free(current);
+        current = next;
+        next = next->next;
+    }
+
+    free(current);
 }
 
 
@@ -79,7 +89,7 @@ void destruction_liste(struct elem *liste) {
  * à inverser. */
 void inversion_liste(struct elem **liste) {
     if (*liste == NULL) {
-        return NULL;
+        return;
     }
 
     struct elem *previous = NULL;
