@@ -40,11 +40,30 @@ void affichage_liste(struct elem *liste) {
 /* Crée une liste simplement chainée à partir des nb_elems éléments du
  * tableau valeurs. */
 struct elem *creation_liste(long unsigned int *valeurs, size_t nb_elems) {
-    /**
-       Votre code est à mettre ici !
-    */
+   struct elem *previous;
+   struct elem *head;
 
-    return NULL;
+   for (size_t i = 0; i < nb_elems; i++) {
+       // Allocate the element
+       struct elem *e = malloc(sizeof (struct elem));
+
+       // Set the head of the list
+       if (i == 0) {
+           head = e;
+       }
+
+    //    printf("%d at @%p\n", *valeurs, e);
+       e-> val = *valeurs;
+       e->next = NULL;
+
+       if (previous != NULL) {
+           previous->next = e;
+       }
+       previous = e;
+       valeurs++;
+   }
+
+    return head;
 }
 
 /* Libère toute la mémoire associée à la liste passée en paramètre. */
