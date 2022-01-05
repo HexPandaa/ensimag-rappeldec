@@ -51,7 +51,29 @@ struct elem *alloc_elem(void) {
    atteignables depuis les têtes de listes
 */
 void gc_elems(struct elem **heads, int nbheads) {
-    /* ajouter votre code ici / add your code here */
+    struct elem *e;
+
+    // Set all bits to zero
+    bt1k_reset();
+
+    // for earch linked list
+    for (int i = 0; i < nbheads; i++) {
+        e = heads[i];
+        // Iterate over the elements
+        while (e != NULL) {
+            // Search for the adress in the reserved block
+            for (long unsigned int i = 0LU; i < SIZE; i++) {
+                // if the adress is in the pool
+                if (e == ((struct elem*) memoire_elem_pool) + i) {
+                    // set the block as used
+                    bt1k_set(i, true);
+                    break;
+                }
+            }
+            // go to the next element
+            e = e->next;
+        }
+    }
 }
 
 void init_elems() {
