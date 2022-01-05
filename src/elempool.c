@@ -36,7 +36,7 @@ struct elem *alloc_elem(void) {
     for (long unsigned int i = 0LU; i < SIZE; i++) {
         // if the block is free
         if (!bt1k_get(i)) {
-            e = memoire_elem_pool[i];
+            e = ((struct elem*) memoire_elem_pool) + i;
             // set the block as used
             bt1k_set(i, true);
             return e;
