@@ -61,15 +61,9 @@ void gc_elems(struct elem **heads, int nbheads) {
         e = heads[i];
         // Iterate over the elements
         while (e != NULL) {
-            // Search for the adress in the reserved block
-            for (long unsigned int i = 0LU; i < SIZE; i++) {
-                // if the adress is in the pool
-                if (e == ((struct elem*) memoire_elem_pool) + i) {
-                    // set the block as used
-                    bt1k_set(i, true);
-                    break;
-                }
-            }
+            // Calculate the index of this adress in the block
+            unsigned long index = (((unsigned long) e) - ((unsigned long) memoire_elem_pool)) / sizeof (struct elem);
+            bt1k_set(index, true);
             // go to the next element
             e = e->next;
         }
